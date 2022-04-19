@@ -37,7 +37,7 @@ contract FriendsMoneySplitter is Ownable {
         Participants[_newUser] = true;
     }
 
-    function getContribution(address _user)
+    function getUserContribution(address _user)
         public
         view
         OnlyOwner

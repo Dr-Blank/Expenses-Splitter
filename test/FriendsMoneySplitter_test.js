@@ -25,8 +25,8 @@ contract("FriendsMoneySplitter", (accounts) => {
     const INSTANCE = await FriendsMoneySplitter.deployed();
     await INSTANCE.addTransaction(50, OWNER, SHOPKEEPER);
     await INSTANCE.addTransaction(5000, FRIEND, SHOPKEEPER);
-    let balance_friend = await INSTANCE.getContribution(FRIEND);
-    let balance_owner = await INSTANCE.getContribution(OWNER);
+    let balance_friend = await INSTANCE.getUserContribution(FRIEND);
+    let balance_owner = await INSTANCE.getUserContribution(OWNER);
     assert.equal(balance_friend, 5000);
     assert.equal(balance_owner, 50);
     transaction = await INSTANCE.LogBook(0);
