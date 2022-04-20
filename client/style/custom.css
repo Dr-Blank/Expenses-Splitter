@@ -1,0 +1,66 @@
+#scrollable{
+    height: auto;
+    max-height: 50vh;
+    overflow-x: hidden;
+}
+
+#search{
+    width:90%;
+    padding: 2px;
+    margin-left: 5%;
+}
+
+.nav-item1{
+    position:relative;
+}
+
+.public_address{
+    opacity: 1;
+    white-space: nowrap; 
+    width: 100px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: opacity 0.2s ease-in;
+}
+
+.main-container{
+    width: 70vw;
+}
+
+.public_address1{
+    opacity: 0;
+    position: absolute;
+    top:0;
+    border-radius: 10px;
+    transition: opacity 0.2s ease-in;
+}
+
+.nav-item1:hover .public_address1{
+    opacity: 1;
+}
+.nav-item1:hover .public_address{
+    opacity: 0;
+}
+
+.add_account_heading{
+    font-size: 20px;
+}
+
+.add_account{
+    align-items: center;
+    margin-top:40px;
+    padding: 0 20px;
+}
+
+.names{
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.names_btn{
+    margin-left: 10px;
+}
+
+.expenses{
+    padding: 0 20px;
+}
