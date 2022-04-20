@@ -14,7 +14,7 @@ contract Ownable {
     }
 }
 
-contract FriendsMoneySplitter is Ownable {
+contract FriendsExpenseSplitter is Ownable {
     struct Transaction {
         int256 amount;
         address from;
@@ -23,6 +23,7 @@ contract FriendsMoneySplitter is Ownable {
 
     Transaction[] public LogBook; // record of the transactions
 
+    address[] public ListOfPartipants;
     mapping(address => bool) public Participants; // if user is a member of the group?
     mapping(address => int256) public Contributions; // dictionary of how much a participant has spent in the group
 
