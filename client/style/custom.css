@@ -57,10 +57,37 @@
     padding: 0 20px;
 }
 
+.names_btn_container{
+    position: relative;
+    display: inline-block;
+}
+
 .names_btn{
     margin-left: 10px;
 }
 
+.names_btn_container span{
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: -10px;
+    right: -7px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.names_btn_container span img{
+    height: 100%;
+    width: auto;
+}
+
+.names_btn_container span img:hover{
+    transform: scale(1.2);
+}
+
 .expenses{
     padding: 0 20px;
+    margin-top: 40px;
 }
+
+

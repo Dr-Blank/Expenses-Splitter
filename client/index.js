@@ -46,9 +46,9 @@ function filterFunction() {
 document.getElementById("add_user_btn").addEventListener("click", () => {
     let name = document.getElementById("username").value;
     let eth_ad = document.getElementById("eth_address").value;
-    Object.assign(users_object, { [name] : eth_ad});
+    Object.assign(users_object, { [name] : { public_address: eth_ad }});
     names_list = document.getElementsByClassName('names')[0];
-    names_list.innerHTML = names_list.innerHTML + '<button type="button" class="btn btn-sm btn-primary names_btn" data-bs-toggle="popover" data-bs-content='+eth_ad+'>'+name+'</button>';
+    names_list.innerHTML = names_list.innerHTML + '<div class="names_btn_container"><button type="button" class="btn btn-sm btn-primary names_btn" data-bs-toggle="popover" data-bs-content='+eth_ad+'>'+name+'</button><span><img class="delete_user" src="images/x.png"></span></div>';
 
     //Popovers
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
@@ -57,4 +57,10 @@ document.getElementById("add_user_btn").addEventListener("click", () => {
     })
 });
 
+document.addEventListener('click', function(event){
+    if(event.target.matches('.delete_user')){
+        delete users_object[event.path[2].innerText];
+        event.path[2].remove();
+    }
+},false);
 
