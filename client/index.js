@@ -2,15 +2,21 @@ let ce_url = 'https://api.coinbase.com/v2/exchange-rates?currency=ETH';
 
 let Client_public_address = "0x000000(placeholder)";
 let Currency;
-let Exchange_rate ;
+let Exchange_rate;
 let Users_object = {};
 let Expenses = [];
+let User_privilege = "Owner";
 
-
+//Public address
 cpa = document.getElementsByClassName("client_public_address");
 for (let i = 0; i < cpa.length; i++) {
     cpa[i].innerText = Client_public_address;
 }
+
+//Current User privilege
+cup = document.querySelector(".navbar-brand");
+cup.innerHTML = "Expenses-Splitter | <span class='user_privilege'>"+User_privilege+"</span>";
+
 
 // Fetches Current exchange rate of ETH and fills the data in dropbox, chosen currency and exchange_rate to a variable
 fetch(ce_url)
@@ -62,6 +68,8 @@ document.getElementById("add_user_btn").addEventListener("click", () => {
     document.getElementById("eth_address").value="";
 });
 
+
+//Universal event listener
 document.addEventListener('click', function(event){
     if(event.target.matches('.delete_user')){
         delete Users_object[event.path[2].innerText];
@@ -76,6 +84,7 @@ document.addEventListener('click', function(event){
     if(event.target.matches('#add_exp_btn')){
         let selected_users = document.getElementsByClassName("selected_user");
         let expense = document.getElementById('total_expense').valueAsNumber;
+        let expense_details = document.getElementById("expense_details").value;
         let count = selected_users.length;
         let individual_due = expense/count;
         if(Currency == null){
@@ -89,8 +98,10 @@ document.addEventListener('click', function(event){
                 Users_object[selected_users[i].innerText].amount_due.push(individual_due);
             }
             document.querySelector('tbody').insertAdjacentHTML("beforeend","<td>"+expense+"</td>"+"<td>"+ Array.from(selected_users,x => x.innerText).join(', ') +"</td>"+"<td>"+individual_due+"</td>"+"<td><button class='btn btn-danger expense_delete'>Delete</button></td>");
+            Expenses.push([expense,expense_details,selected_users,individual_due]);
         }
         document.getElementById('total_expense').value = "";
+        document.getElementById("expense_details").value ="";
     };
 
     if(event.target.matches(".expense_delete")){
@@ -99,6 +110,7 @@ document.addEventListener('click', function(event){
         for (let i = 0; i < users_to_delete.length; i++) {
             Users_object[users_to_delete[i]].amount_due.splice(index,1)
         }
+        Expenses.splice(index-1,1);
         event.path[2].remove();
     }
 },false);
