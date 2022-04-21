@@ -47,8 +47,14 @@
     font-weight: 500;
 }
 
+.user_privilege{
+    color: rgb(61, 61, 61);
+    font-size: 18px;
+    font-style: italic;
+}
+
 .add_account_heading{
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .add_account{
@@ -98,9 +104,13 @@
 .expenses{
     border: grey 2px solid;
     border-radius: 5px;
-    padding: 40px 20px;
+    padding: 20px 20px;
     margin: 20px;
     align-items: center;
+}
+
+#expense_details{
+    margin-top: 10px;
 }
 
 #add_exp_btn{
@@ -123,4 +133,3 @@ tbody{
 .expense_delete{
     font-size: small;
 }
-
