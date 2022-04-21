@@ -130,10 +130,36 @@ contract FriendsExpenseSplitter is Ownable {
         external
         view
         OnlyParticipant
-        returns (uint256)
+        returns (uint256 contribution)
     {
         if (!isMember[_user]) revert NotAParticipant(_user);
 
-        return contributions[_user];
+        contribution = contributions[_user];
+    }
+
+    function settleBalance() external payable OnlyOwner {
+        uint256 contractBalance = address(this).balance;
+
+        assert(contractBalance == listOfMembers.length * baseAmount);
+
+        uint256 expensePerHead = (contractBalance - potValue) /
+            listOfMembers.length;
+
+        // for every member
+        for (uint256 i = 0; i < listOfMembers.length; i++) {
+            address payable member = payable(listOfMembers[i]);
+
+            uint256 returnAmount = baseAmount +
+                contributions[member] -
+                expensePerHead;
+                
+            member.transfer(returnAmount);
+            isMember[member] = false;
+            contributions[member] = 0;
+        }
+        delete listOfMembers;
+
+        assert(address(this).balance == 0);
+        potValue = 0;
     }
 }
