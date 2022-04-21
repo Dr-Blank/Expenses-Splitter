@@ -19,8 +19,8 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 w-100 justify-content-between">
               <li class="nav-item nav-item1">
-                <a class="nav-link active public_address" aria-current="page" href="#">0x000publicaddress(currentUser)</a>
-                <a class="nav-link active public_address1" aria-current="page" href="#">0x000publicaddress(currentUser)</a>
+                <a class="nav-link active client_public_address1 client_public_address" aria-current="page" href="#"></a>
+                <a class="nav-link active client_public_address2 client_public_address" aria-current="page" href="#"></a>
               </li>
               <li class="nav-item dropdown me-5 pe-2">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,7 +35,7 @@
         </div>
       </nav>
 
-    <div class="container-fluid main-container">
+    <div class="container main-container">
 
       <div class="add_account d-flex flex-row justify-content-between">
         <div class="add_account_heading me-3">Add Account</div>
@@ -48,22 +48,30 @@
         <button id="add_user_btn" class="btn btn-primary">Add</button>
       </div>
 
-      <div class="names">
-        <!-- <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="popover" data-bs-content="0x000000">Test</button> -->
-      </div>
-
-      <div class="expenses d-flex flex-row justify-content-between">
-        <div class="add_account_heading me-3">Add Expense</div>
-        <div class="me-3">
+      <div class="expenses row justify-content-between">
+        <div class="col">
           <input type="number" id="total_expense" placeholder="Total Expense">
         </div>
-        <div class="me-3">
-          <input type="text" id="" placeholder="0x0000">
+        <div class="col-6 names">
+          <!-- <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="popover" data-bs-content="0x000000">Test</button> -->
         </div>
-        <button id="add_exp_btn" class="btn btn-primary">Add</button>
+        <button id="add_exp_btn" class="col btn btn-info"><span style="font-weight: bolder;font-size:20px;">+</span> Add an Expense</button>
       </div>
 
-
+      <div class="table_container">
+        <table class="table table-expenses">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Expense</th>
+              <th scope="col">Users</th>
+              <th scope="col">Individual Due</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
     </div>
 </body>
 <!-- JavaScript Bundle with Popper -->
