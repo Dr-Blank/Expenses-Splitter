@@ -109,8 +109,13 @@
     align-items: center;
 }
 
+#total_expense{
+    width: 200px;
+}
+
 #expense_details{
     margin-top: 10px;
+    width: 200px;
 }
 
 #add_exp_btn{
