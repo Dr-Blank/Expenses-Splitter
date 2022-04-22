@@ -1,7 +1,5 @@
 let ce_url = 'https://api.coinbase.com/v2/exchange-rates?currency=ETH';
 
-import Web3 from 'web3';
-
 let Client_public_address = "0x000000(placeholder)";
 let Currency;
 let Exchange_rate;
@@ -10,10 +8,13 @@ let Expenses = [];
 let User_privilege = "Owner";
 
 //Public address
-cpa = document.getElementsByClassName("client_public_address");
-for (let i = 0; i < cpa.length; i++) {
-    cpa[i].innerText = Client_public_address;
-}
+function show_public_address(){
+    cpa = document.getElementsByClassName("client_public_address");
+    for (let i = 0; i < cpa.length; i++) {
+        cpa[i].innerText = Client_public_address;
+    }
+};
+
 
 //Current User privilege
 cup = document.querySelector(".navbar-brand");
@@ -137,4 +138,24 @@ document.addEventListener('click', function(event){
 ░░░╚═╝░░░╚═╝░░╚══════╝╚═════╝░╚═════╝░
 */
 
+import Web3 from 'web3';
+// import configuration1 from '../build/contracts/FriendsExpenseSplitter.json';
+// import configuration2 from '../build/contracts/Ownable.json';
 
+// const contract_address = configuration1.networks['5777'].address;
+// const contract_abi1 = configuration1.abi;
+// const contract_abi2 = configuration2.abi;
+
+const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
+
+// const contract1 = new web3.eth.Contract(contract_address,contract_abi1);
+// const contract2 = new web3.eth.Contract(contract_address,contract_abi2);
+
+const main = async () => {
+    const accounts = await web3.eth.requestAccounts();
+    account = accounts[0];
+    Client_public_address = account;
+    show_public_address();
+}
+
+main();
