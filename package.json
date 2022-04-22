@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "start:frontend": "parcel client/index.html",
+    "frontend": "parcel client/index.html",
+    "backend": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -18,14 +19,17 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
+    "jquery": "^3.6.0",
+    "solc": "^0.8.13",
     "web3": "^1.7.3"
   },
   "devDependencies": {
-    "parcel": "^2.5.0",
     "assert": "^2.0.0",
     "events": "^3.3.0",
     "https-browserify": "^1.0.0",
+    "nodemon": "^2.0.15",
     "os-browserify": "^0.3.0",
+    "parcel": "^2.5.0",
     "querystring-es3": "^0.2.1",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
