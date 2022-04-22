@@ -170,6 +170,7 @@ if (clientAddress === "") {
 }
 
 $("#connect-metamask").on("click", async () => {
+  console.log("Connecting to metamask");
   const accounts = await web3.eth.requestAccounts();
   account = accounts[0];
   clientAddress = account;
@@ -179,3 +180,38 @@ $("#connect-metamask").on("click", async () => {
   show_public_address();
 });
 
+// method to get the raw byte code of the contract from backend
+
+$("#deploy-contract").on("click", async () => {
+  console.log("fetching contract from server");
+  $.ajax({
+    url: "http://localhost:3000/api/compile",
+    type: "GET",
+    success: (data) => {
+      console.log("deploying contract");
+      deployContract(data.bytecode, data.ABI);
+    },
+    error: (error) => {
+      console.error(" server not available ", error);
+    },
+  });
+});
+
+function deployContract(bytecode, ABI) {
+    // console.log('ABI :>> ', ABI);
+    contract = new web3.eth.Contract(ABI);
+
+  contract
+    .deploy({ data: bytecode })
+    .send({ from: clientAddress, gas: 4700000 })
+    .on("receipt", (receipt) => {
+      //event,transactions,contract address will be returned by blockchain
+      
+      console.log("Contract Address:", receipt.contractAddress);
+    })
+    .then((demoContract) => {
+      demoContract.methods.OWNER().call((err, data) => {
+        console.log("Owner:", data);
+      });
+    });
+}
