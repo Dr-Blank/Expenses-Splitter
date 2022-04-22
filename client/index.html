@@ -19,18 +19,18 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 w-100 justify-content-between">
               <li class="nav-item nav-item1">
-                <a class="nav-link active client_public_address1 client_public_address" aria-current="page" href="#"></a>
-                <a class="nav-link active client_public_address2 client_public_address" aria-current="page" href="#"></a>
+                <a class="nav-link active client_public_address1 client_public_address" aria-label="account" aria-current="page" href="#"></a>
+                <a class="nav-link active client_public_address2 client_public_address" aria-label="account" aria-current="page" href="#"></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active user_privilege" href="#"></a>
+                <a class="nav-link active user_privilege" aria-label="account" href="#"></a>
               </li>
               <li class="nav-item dropdown me-5 pe-2">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Currency
                 </a>
                 <ul class="dropdown-menu me-5" id="scrollable" aria-labelledby="navbarDropdown">
-                  <input type="text" placeholder="Search..." id="search" onkeyup="filterFunction()">
+                  <li><input type="text" placeholder="Search..." id="search" onkeyup="filterFunction()"></li>
                 </ul>
               </li>
             </ul>
@@ -48,7 +48,7 @@
         <div class="me-3">
           <input type="text" id="eth_address" placeholder="ETH Public address">
         </div>
-        <button id="add_user_btn" class="btn btn-primary">Add</button>
+        <button type="button" id="add_user_btn" class="btn btn-primary">Add</button>
       </div>
 
       <div class="expenses row justify-content-between">
@@ -59,7 +59,7 @@
         <div class="col-6 names">
           <!-- <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="popover" data-bs-content="0x000000">Test</button> -->
         </div>
-        <button id="add_exp_btn" class="col btn btn-info"><span style="font-weight: bolder;font-size:20px;">+</span> Add an Expense</button>
+        <button id="add_exp_btn" class="col btn btn-info"><span id="plus">+</span> Add an Expense</button>
       </div>
 
       <div class="table_container">
@@ -80,5 +80,5 @@
 </body>
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="index.js"></script>
+<script src="index.js" type="module"></script>
 </html>
