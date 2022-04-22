@@ -1,5 +1,7 @@
 let ce_url = 'https://api.coinbase.com/v2/exchange-rates?currency=ETH';
 
+import Web3 from 'web3';
+
 let Client_public_address = "0x000000(placeholder)";
 let Currency;
 let Exchange_rate;
@@ -71,22 +73,26 @@ document.getElementById("add_user_btn").addEventListener("click", () => {
 
 //Universal event listener
 document.addEventListener('click', function(event){
+
+    // Delete User Event listener
     if(event.target.matches('.delete_user')){
         delete Users_object[event.path[2].innerText];
         event.path[2].remove();
     };
 
+    // Select Users Event listener
     if(event.target.matches('.names_btn')){
         event.target.classList.toggle('btn-success');
         event.target.classList.toggle('selected_user');
     };
 
+    // Add Expense Event Listener
     if(event.target.matches('#add_exp_btn')){
         let selected_users = document.getElementsByClassName("selected_user");
         let expense = document.getElementById('total_expense').valueAsNumber;
+        let total_users = document.getElementsByClassName('names_btn');
         let expense_details = document.getElementById("expense_details").value;
-        let count = selected_users.length;
-        let individual_due = expense/count;
+        let individual_due = expense/selected_users.length;
         if(Currency == null){
             alert("choose Currency");
         }
@@ -94,8 +100,13 @@ document.addEventListener('click', function(event){
             alert("Choose at least one user");
         }
         else{
-            for (let i = 0; i < count; i++) {
-                Users_object[selected_users[i].innerText].amount_due.push(individual_due);
+            for (let i = 0; i < total_users.length; i++) {
+                if(total_users[i].classList.contains("selected_user")){
+                    Users_object[total_users[i].innerText].amount_due.push(individual_due);
+                }
+                else{
+                    Users_object[total_users[i].innerText].amount_due.push(0);
+                }
             }
             document.querySelector('tbody').insertAdjacentHTML("beforeend","<td>"+expense+"</td>"+"<td>"+ Array.from(selected_users,x => x.innerText).join(', ') +"</td>"+"<td>"+individual_due+"</td>"+"<td><button class='btn btn-danger expense_delete'>Delete</button></td>");
             Expenses.push([expense,expense_details,selected_users,individual_due]);
@@ -115,5 +126,15 @@ document.addEventListener('click', function(event){
     }
 },false);
 
+
+
+/*
+░██╗░░░░░░░██╗███████╗██████╗░██████╗░
+░██║░░██╗░░██║██╔════╝██╔══██╗╚════██╗
+░╚██╗████╗██╔╝█████╗░░██████╦╝░█████╔╝
+░░████╔═████║░██╔══╝░░██╔══██╗░╚═══██╗
+░░╚██╔╝░╚██╔╝░███████╗██████╦╝██████╔╝
+░░░╚═╝░░░╚═╝░░╚══════╝╚═════╝░╚═════╝░
+*/
 
 
