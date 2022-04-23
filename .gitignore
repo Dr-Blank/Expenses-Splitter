@@ -107,7 +107,9 @@ dist
 .tern-port
 
 # VSCode
-.vscode/
+.vscode/*
+# except keep track of 
+!.vscode/settings*
 
 # Truffle
 build/

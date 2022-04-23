@@ -1,0 +1,22 @@
+{
+  "files.associations": {
+    "**/src/components/**/*.js": "javascriptreact",
+    "**/src/App.js": "javascriptreact",
+    "**/src/**/*.jsx": "javascriptreact"
+  },
+
+  // formatting options for prettier
+  "html.format.wrapAttributes": "force",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
