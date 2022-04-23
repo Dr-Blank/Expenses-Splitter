@@ -1,5 +1,4 @@
 import $ from "jquery";
-
 import Web3 from "web3";
 
 let ce_url = "https://api.coinbase.com/v2/exchange-rates?currency=ETH";
@@ -160,8 +159,6 @@ document.addEventListener(
   false
 );
 
-
-
 const web3 = new Web3(Web3.givenProvider || "http://127.0.0.1:7545");
 
 // metamask connect
@@ -188,7 +185,7 @@ $("#connect-metamask").on("click", async () => {
 $("#deploy-contract").on("click", async () => {
   console.log("fetching contract from server");
   $.ajax({
-    url: "http://localhost:3000/api/compile",
+    url: "http://localhost:3001/api/compile",
     type: "GET",
     success: (data) => {
       console.log("deploying contract");
@@ -201,15 +198,15 @@ $("#deploy-contract").on("click", async () => {
 });
 
 function deployContract(bytecode, ABI) {
-    // console.log('ABI :>> ', ABI);
-    contract = new web3.eth.Contract(ABI);
+  // console.log('ABI :>> ', ABI);
+  contract = new web3.eth.Contract(ABI);
 
   contract
     .deploy({ data: bytecode })
     .send({ from: clientAddress, gas: 4700000 })
     .on("receipt", (receipt) => {
       //event,transactions,contract address will be returned by blockchain
-      
+
       console.log("Contract Address:", receipt.contractAddress);
     })
     .then((demoContract) => {

@@ -4,7 +4,7 @@ var cors = require('cors');
 
 const Web3 = require("web3");
 
-const PORT = 3000;
+const PORT = 3001;
 
 const app = express();
 app.use(cors())
