@@ -8,12 +8,12 @@ const PORT = 3000;
 
 const app = express();
 app.use(cors())
-// app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
 
-// app.get('/', (req, res) => {
-//   res.render('./client/index');
-// })
+app.get('/', (req, res) => {
+  res.render('./client/index');
+})
 
 
 
