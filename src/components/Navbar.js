@@ -16,8 +16,7 @@ import React from "react";
 //     }
 //   }
 
-const Navbar = ({ client_public_address,curr_data }) => {
-
+const Navbar = ({ client_public_address, curr_data, clientPrivilege }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -40,18 +39,24 @@ const Navbar = ({ client_public_address,curr_data }) => {
                 className="nav-link active client_public_address1 client_public_address"
                 aria-label="account"
                 aria-current="page"
-              >{client_public_address}</div>
+              >
+                {client_public_address}
+              </div>
               <div
                 className="nav-link active client_public_address2 client_public_address"
                 aria-label="account"
                 aria-current="page"
-              >{client_public_address}</div>
+              >
+                {client_public_address}
+              </div>
             </li>
             <li className="nav-item">
               <div
                 className="nav-link active user_privilege"
                 aria-label="account"
-              >User-Privilege</div>
+              >
+                {clientPrivilege.stringify}
+              </div>
             </li>
             <li className="nav-item dropdown me-5 pe-2">
               <div
@@ -70,10 +75,10 @@ const Navbar = ({ client_public_address,curr_data }) => {
               >
                 <li>
                   <input
-                    // type="text"
-                    // placeholder="Search..."
-                    // id="search"
-                    // onkeyup="filterFunction()"
+                  // type="text"
+                  // placeholder="Search..."
+                  // id="search"
+                  // onkeyup="filterFunction()"
                   />
                 </li>
                 {/* {  (Object.keys(curr_data.data.rates)).map(curr => (
