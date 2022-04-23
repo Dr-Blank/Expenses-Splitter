@@ -16,7 +16,7 @@ import React from "react";
 //     }
 //   }
 
-const Navbar = ({ client_public_address, curr_data, clientPrivilege }) => {
+const Navbar = ({ clientPublicAddress, clientPrivilege }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -40,14 +40,14 @@ const Navbar = ({ client_public_address, curr_data, clientPrivilege }) => {
                 aria-label="account"
                 aria-current="page"
               >
-                {client_public_address}
+                {clientPublicAddress}
               </div>
               <div
                 className="nav-link active client_public_address2 client_public_address"
                 aria-label="account"
                 aria-current="page"
               >
-                {client_public_address}
+                {clientPublicAddress}
               </div>
             </li>
             <li className="nav-item">
@@ -81,9 +81,12 @@ const Navbar = ({ client_public_address, curr_data, clientPrivilege }) => {
                   // onkeyup="filterFunction()"
                   />
                 </li>
-                {/* {  (Object.keys(curr_data.data.rates)).map(curr => (
-                    <li><div className="dropdown-item">{curr}</div></li>
-                ))} */}
+                {  
+                // console.log(currencyData)
+                // (Object.keys(currencyData.data.rates)).map(curr => (
+                //     <li><div className="dropdown-item">{curr}</div></li>
+                // ))
+                }
               </ul>
             </li>
           </ul>
