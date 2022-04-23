@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar';
 
-// import Web3 from "web3";
+import Web3 from "web3";
 
 function App() {
-
+  // Constants/Vars to be used in the App
   const ce_url = "https://api.coinbase.com/v2/exchange-rates?currency=ETH";
   let curr_data;
 
