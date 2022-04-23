@@ -23,10 +23,11 @@ contract FriendsExpenseSplitter is Ownable {
     }
 
     Expense[] public expensesBook; // record of the expenses
+    // TODO: remove public property
 
     uint256 public immutable baseAmount;
     uint256 public potValue; // the current value available to spend in any expenses
-    // FIXME remove public in potValue
+    // TODO: remove public in potValue
 
     mapping(address => bool) public isAllowedToParticipate; // if user is allowed to join
     mapping(address => bool) public isAllowedToManage; // if a member can add expenses
@@ -34,6 +35,7 @@ contract FriendsExpenseSplitter is Ownable {
     address[] public listOfMembers;
 
     mapping(address => uint256) public contributions; // dictionary of how much a participant has spent in the group
+    // TODO: remove public property from all above
 
     error NotAParticipant(address user);
     error NotEnoughFunds(uint256 amountRequired, uint256 amountSent);
@@ -71,6 +73,7 @@ contract FriendsExpenseSplitter is Ownable {
         external
         OnlyOwner
     {
+        // TODO make onlyManager
         isAllowedToParticipate[_user] = _status;
         isAllowedToManage[_user] = _status ? isAllowedToManage[_user] : false;
     }
@@ -138,6 +141,7 @@ contract FriendsExpenseSplitter is Ownable {
     }
 
     function settleBalance() external payable OnlyOwner {
+        // TODO: testing left
         uint256 contractBalance = address(this).balance;
 
         assert(contractBalance == listOfMembers.length * baseAmount);
@@ -152,7 +156,7 @@ contract FriendsExpenseSplitter is Ownable {
             uint256 returnAmount = baseAmount +
                 contributions[member] -
                 expensePerHead;
-                
+
             member.transfer(returnAmount);
             isMember[member] = false;
             contributions[member] = 0;

@@ -22,7 +22,7 @@ Should be a Readme but is TODO for now
 
 ---
 
- - [ ] Integration with metamask
+ - [ ] Integration with MetaMask
  - [ ] Testing creation of the contract
  - [ ] Confirming adding of transactions before sending them to blockchain.
 
