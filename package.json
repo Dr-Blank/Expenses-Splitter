@@ -9,6 +9,7 @@
   "scripts": {
     "frontend": "parcel client/index.html",
     "backend": "nodemon server.js",
+    "dev": "start npm run frontend && start npm run backend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -25,7 +26,7 @@
     "ganache": "^7.0.4",
     "jquery": "^3.6.0",
     "solc": "^0.8.13",
-    "truffle": "^5.5.11",
+    "truffle": "^5.1.67",
     "web3": "^1.7.3"
   },
   "devDependencies": {
