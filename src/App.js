@@ -52,6 +52,7 @@ function App() {
   //   });
   // }, []);
 
+  // TODO: Error Handling/do not let user to enter any empty values (popups,etc)
   return (
     <div className="App">
       <Navbar
