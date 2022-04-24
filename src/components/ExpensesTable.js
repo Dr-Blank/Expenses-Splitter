@@ -9,18 +9,18 @@ const ExpensesTable = ({expenses, deleteExpense}) => {
         <table className="table table-expenses">
           <thead className="thead-dark">
             <tr>
-              <th scope="col">Expense</th>
+              <th scope="col">Description</th>
               <th scope="col">Paid by</th>
-              <th scope="col">Individual Due</th>
+              <th scope="col">Amount</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {expenses.map((expense) => (
-              <tr key={expense.ethAddress}>
-                <td>{expense.expense}</td>
-                <td>{expense.client}</td>
-                <td>Placeholder</td>
+            {expenses.map((expense,index) => (
+              <tr key={index}>
+                <td>{expense.description}</td>
+                <td>{expense.paidBy}</td>
+                <td>{expense.amount}</td>
                 <td>
                   <button
                     className="btn btn-danger expense_delete"

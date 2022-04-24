@@ -13,9 +13,8 @@ const AddExpense = ( {clients, setClients, expenses, setExpenses, deleteClient})
     setExpenses([
       ...expenses,
       {
-        name: selectedClient.name,
-        ethAddress: selectedClient.ethAddress,
-        expense: expense,
+        amount: expense,
+        paidBy: selectedClient.ethAddress,
         description: description,
       },
     ]);
