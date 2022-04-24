@@ -35,6 +35,14 @@ function App() {
   const [clientPrivilege, setClientPrivilege] = useState(Privilege.NEW_CLIENT);
   const [activeContract, setActiveContract] = useState();
 
+  const deleteClient = (id) => {
+    setClients(clients.filter(c => c.ethAddress!=id))
+  }
+  
+  const deleteExpense = (id) => {
+    setExpenses(expenses.filter(e => e.ethAddress!=id))
+  }
+
   // TODO: Can this api be eliminated? fetch json data once and hard code it? (We need current exchange rate)
   // useEffect(() => {
   //   fetch(currencyUrl)
@@ -44,6 +52,7 @@ function App() {
   //   });
   // }, []);
 
+  // TODO: Error Handling/do not let user to enter any empty values (popups,etc)
   return (
     <div className="App">
       <Navbar
@@ -67,9 +76,11 @@ function App() {
         setClients={setClients}
         expenses = {expenses}
         setExpenses = {setExpenses}
+        deleteClient={deleteClient}
       />
       <ExpensesTable 
         expenses={expenses}
+        deleteExpense={deleteExpense}
       />
     </div>
   );

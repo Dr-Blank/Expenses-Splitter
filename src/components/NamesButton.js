@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import xpng from './images/x.png';
 
-const NamesButton = ({client, setSelectedClient}) => {
+const NamesButton = ({client, setSelectedClient, deleteClient}) => {
 
   const [isSelected, setIsSelected] = useState(false);
 
@@ -12,7 +12,7 @@ const NamesButton = ({client, setSelectedClient}) => {
       else{
         setIsSelected(true);
       }
-      setSelectedClient(client.name);
+      setSelectedClient({name:client.name,ethAddress:client.ethAddress});
   };
 
   // TODO:add ability to delete an user
@@ -24,7 +24,7 @@ const NamesButton = ({client, setSelectedClient}) => {
             className={`btn btn-sm btn-primary names_btn ${isSelected ? "btn-success selected_user" : ""}`}>
                 {client.name}
         </button>
-        <span>
+        <span onClick={() =>deleteClient(client.ethAddress)}>
             <img className="delete_user" src={xpng} />
         </span>
     </div>
