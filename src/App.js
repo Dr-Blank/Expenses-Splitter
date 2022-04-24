@@ -35,6 +35,14 @@ function App() {
   const [clientPrivilege, setClientPrivilege] = useState(Privilege.NEW_CLIENT);
   const [activeContract, setActiveContract] = useState();
 
+  const deleteClient = (id) => {
+    setClients(clients.filter(c => c.ethAddress!=id))
+  }
+  
+  const deleteExpense = (id) => {
+    setExpenses(expenses.filter(e => e.ethAddress!=id))
+  }
+
   // TODO: Can this api be eliminated? fetch json data once and hard code it? (We need current exchange rate)
   // useEffect(() => {
   //   fetch(currencyUrl)
@@ -67,9 +75,11 @@ function App() {
         setClients={setClients}
         expenses = {expenses}
         setExpenses = {setExpenses}
+        deleteClient={deleteClient}
       />
       <ExpensesTable 
         expenses={expenses}
+        deleteExpense={deleteExpense}
       />
     </div>
   );
