@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 
-const AddAccount = ({ setClients, clients}) => {
+const AddAccount = ({ setClients, clients, Privilege}) => {
 
     const [name, setName] = useState("");
     const [ethAddress,setEthAddress] = useState("");
 
     const addClient = () => {
-        setClients([...clients,{name: name, ethAddress: ethAddress}]);
+        setClients([...clients,{name: name, ethAddress: ethAddress, privilege: Privilege.PARTICIPANT}]);
         setName("");
         setEthAddress("");
     };
