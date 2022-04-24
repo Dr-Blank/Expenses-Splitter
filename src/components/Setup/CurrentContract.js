@@ -1,7 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const CurrentContract = ({ activeContract, setActiveContract }) => {
+const CurrentContract = ({
+  activeContract,
+  setActiveContract,
+  activeClient,
+  setActiveClient,
+  Privilege,
+}) => {
   return (
     <>
       <h2 className="">Current Contract</h2>
@@ -15,7 +21,8 @@ const CurrentContract = ({ activeContract, setActiveContract }) => {
           <>
             <button
               className="btn btn-warning me-2"
-              onClick={() => {navigator.clipboard.writeText(activeContract.options.address)
+              onClick={() => {
+                navigator.clipboard.writeText(activeContract.options.address);
               }}
             >
               Copy Contract Address
@@ -25,6 +32,10 @@ const CurrentContract = ({ activeContract, setActiveContract }) => {
               className="btn btn-outline-danger me-2"
               onClick={() => {
                 setActiveContract(undefined);
+                setActiveClient({
+                  ...activeClient,
+                  privilege: Privilege.NEW_CLIENT,
+                });
               }}
             >
               Remove this contract

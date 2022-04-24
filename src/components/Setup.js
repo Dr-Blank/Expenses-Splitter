@@ -6,14 +6,15 @@ import JoinExistingContract from "./Setup/JoinExistingContract";
 
 const Setup = ({
   web3,
-  clientAddress,
-  setClientAddress,
   setActiveContract,
+  activeClient,
+  setActiveClient,
   activeContract,
+  Privilege,
 }) => {
   // connection state
   const [isMetaMaskConnected, setMetaMaskConnected] = useState(false);
-  const [amountToParticipate, setAmountToParticipate] = useState(0);
+  const [amountToParticipate, setAmountToParticipate] = useState("");
   let contractAddress = "0xBfbdb50CCb1F4E43f0b673193d209012C2e81b69";
   const BACKEND_SERVER_PORT = 3001;
   // console.log("contractAddress :>> ", contractAddress);
@@ -25,7 +26,7 @@ const Setup = ({
       const accounts = await web3.eth.requestAccounts();
       let account = accounts[0];
       setMetaMaskConnected(true);
-      setClientAddress(account);
+      setActiveClient({ ...activeClient, ethAddress: account });
     } catch (error) {
       window.alert("MetaMask refused to connect");
     }
@@ -33,14 +34,14 @@ const Setup = ({
 
   async function deployContract(bytecode, ABI, baseAmount = 1) {
     // check for empty address
-    if (!clientAddress) {
+    if (!activeClient.ethAddress) {
       window.alert("Please connect to MetaMask first");
       return;
     }
     let contract = new web3.eth.Contract(ABI);
     try {
       let deployedContract = await contract.deploy({ data: bytecode }).send({
-        from: clientAddress,
+        from: activeClient.ethAddress,
         gas: 4700000,
         value: web3.utils.toWei(String(baseAmount), "ether"),
         gasPrice: "2000000000",
@@ -50,6 +51,7 @@ const Setup = ({
       window.alert(
         `Deployed new contract instance at address: ${deployedContract.options.address}`
       );
+      setActiveClient({ ...activeClient, privilege: Privilege.OWNER });
     } catch (error) {
       console.error("Deploy failed", error);
       window.alert(error.message);
@@ -81,7 +83,7 @@ const Setup = ({
     let data = await response.json();
 
     const existingContract = new web3.eth.Contract(data.ABI, contractAddress, {
-      from: clientAddress,
+      from: activeClient.ethAddress,
       gasPrice: "20000000000",
     });
 
@@ -97,7 +99,7 @@ const Setup = ({
     }
     let amountToParticipate = await activeContract.methods
       .baseAmount()
-      .call({ from: clientAddress });
+      .call({ from: activeClient.ethAddress });
     setAmountToParticipate(amountToParticipate);
   }
   // joinContract(contractAddress)
@@ -123,6 +125,9 @@ const Setup = ({
           <CurrentContract
             activeContract={activeContract}
             setActiveContract={setActiveContract}
+            setActiveClient={setActiveClient}
+            activeClient={activeClient}
+            Privilege={Privilege}
           />
         </div>
       </div>
@@ -134,9 +139,14 @@ const Setup = ({
         </div>
         <div className="col-lg-6">
           <JoinExistingContract
+            web3={web3}
+            activeContract={activeContract}
             joinContract={joinContract}
             amountToParticipate={amountToParticipate}
             getAmountToParticipate={getAmountToParticipate}
+            activeClient={activeClient}
+            setActiveClient={setActiveClient}
+            Privilege={Privilege}
           />
         </div>
       </div>

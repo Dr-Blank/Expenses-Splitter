@@ -46,6 +46,8 @@ const CreateNewContract = ({ deployNewContract }) => {
   );
 };
 
-CreateNewContract.propTypes = {};
+CreateNewContract.propTypes = {
+  deployNewContract: PropTypes.func,
+};
 
 export default CreateNewContract;

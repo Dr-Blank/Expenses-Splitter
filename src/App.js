@@ -30,18 +30,19 @@ function App() {
   const [clients, setClients] = useState([]); // {name: name, ethAddress: ethAddress}
   const [expenses, setExpenses] = useState([]);
 
-  const [clientAddress, setClientAddress] = useState("");
+  const [activeClient, setActiveClient] = useState(
+    new Client("", "", Privilege.NEW_CLIENT)
+  );
 
-  const [clientPrivilege, setClientPrivilege] = useState(Privilege.NEW_CLIENT);
   const [activeContract, setActiveContract] = useState();
 
   const deleteClient = (id) => {
-    setClients(clients.filter(c => c.ethAddress!=id))
-  }
-  
+    setClients(clients.filter((c) => c.ethAddress !== id));
+  };
+
   const deleteExpense = (id) => {
-    setExpenses(expenses.filter(e => e.ethAddress!=id))
-  }
+    setExpenses(expenses.filter((e) => e.ethAddress !== id));
+  };
 
   // TODO: Can this api be eliminated? fetch json data once and hard code it? (We need current exchange rate)
   // useEffect(() => {
@@ -56,32 +57,27 @@ function App() {
   return (
     <div className="App">
       <Navbar
-        clientPublicAddress={clientAddress}
+        clientPublicAddress={activeClient.ethAddress}
         //currencyData={currencyData}
-        clientPrivilege={clientPrivilege}
+        clientPrivilege={activeClient.privilege}
       />
       <Setup
         web3={web3}
-        clientAddress={clientAddress}
+        activeClient={activeClient}
+        setActiveClient={setActiveClient}
         activeContract={activeContract}
-        setClientAddress={setClientAddress}
         setActiveContract={setActiveContract}
+        Privilege={Privilege}
       />
-      <AddAccount 
-        setClients={setClients} 
-        clients={clients} 
-      />
-      <AddExpense 
+      <AddAccount setClients={setClients} clients={clients} />
+      <AddExpense
         clients={clients}
         setClients={setClients}
-        expenses = {expenses}
-        setExpenses = {setExpenses}
+        expenses={expenses}
+        setExpenses={setExpenses}
         deleteClient={deleteClient}
       />
-      <ExpensesTable 
-        expenses={expenses}
-        deleteExpense={deleteExpense}
-      />
+      <ExpensesTable expenses={expenses} deleteExpense={deleteExpense} />
     </div>
   );
 }
