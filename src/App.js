@@ -4,6 +4,7 @@ import Web3 from "web3";
 // components
 import Navbar from "./components/Navbar";
 import Setup from "./components/Setup";
+import AddAccount from "./components/AddAccount";
 
 // custom Classes
 import Privilege from "./class/Privilege";
@@ -55,6 +56,7 @@ function App() {
         setClientAddress={setClientAddress}
         setActiveContract={setActiveContract}
       />
+      <AddAccount />
     </div>
   );
 }
