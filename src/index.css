@@ -60,12 +60,26 @@
 }
 
 .add_account_heading{
-  font-size: 18px;
+  font-style: normal;
 }
 
 .add_account{
   align-items: center;
-  margin-top:40px;
+  margin:15px 0 30px;
+}
+
+#username{
+  margin: 0 20px 0 0;
+  width: 30%;
+}
+
+#eth_address{
+  margin: 0 20px 0 0;
+  width: 35%;
+}
+
+#add_user_btn{
+  width: 15%;
 }
 
 .names{
@@ -84,7 +98,7 @@
 }
 
 .selected_user{
- border: dashed 2px rgb(255, 255, 255);
+ border: solid 1px rgb(21, 21, 21);
 }
 
 .names_btn_container span{
@@ -109,8 +123,7 @@
 .expenses{
   border: grey 2px solid;
   border-radius: 5px;
-  padding: 20px 20px;
-  margin: 20px;
+  padding: 20px 0;
   align-items: center;
 }
 
@@ -119,11 +132,14 @@
 }
 
 #expense_details{
-  margin-top: 10px;
+  resize: none;
+  margin-top: 15px;
   width: 200px;
+  min-height: 150px;
 }
 
 #add_exp_btn{
+  margin: 0 30px;
   color:white;
 }
 

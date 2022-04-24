@@ -5,6 +5,8 @@ import Web3 from "web3";
 import Navbar from "./components/Navbar";
 import Setup from "./components/Setup";
 import AddAccount from "./components/AddAccount";
+import AddExpense from "./components/AddExpense";
+import ExpensesTable from "./components/ExpensesTable";
 
 // custom Classes
 import Privilege from "./class/Privilege";
@@ -25,7 +27,7 @@ function App() {
   // let john = Client(0x1234, "John", Privilege.MANAGER);
   // let beers = Expense(100, john.ethAddress, "Beers");
 
-  const [clients, setClients] = useState([]);
+  const [clients, setClients] = useState([]); // {name: name, ethAddress: ethAddress}
   const [expenses, setExpenses] = useState([]);
 
   const [clientAddress, setClientAddress] = useState("");
@@ -56,7 +58,19 @@ function App() {
         setClientAddress={setClientAddress}
         setActiveContract={setActiveContract}
       />
-      <AddAccount />
+      <AddAccount 
+        setClients={setClients} 
+        clients={clients} 
+      />
+      <AddExpense 
+        clients={clients}
+        setClients={setClients}
+        expenses = {expenses}
+        setExpenses = {setExpenses}
+      />
+      <ExpensesTable 
+        expenses={expenses}
+      />
     </div>
   );
 }
