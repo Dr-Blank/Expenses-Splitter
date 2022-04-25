@@ -69,7 +69,13 @@ function App() {
         setActiveContract={setActiveContract}
         Privilege={Privilege}
       />
-      <AddAccount setClients={setClients} clients={clients} />
+      <AddAccount
+        setClients={setClients}
+        clients={clients}
+        activeContract={activeContract}
+        activeClient={activeClient}
+        Privilege={Privilege}
+      />
       <AddExpense
         clients={clients}
         setClients={setClients}
