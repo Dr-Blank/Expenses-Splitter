@@ -22,20 +22,17 @@ contract FriendsExpenseSplitter is Ownable {
         string description;
     }
 
-    Expense[] public expensesBook; // record of the expenses
-    // TODO: remove public property
+    Expense[] expensesBook; // record of the expenses
 
     uint256 public immutable baseAmount;
-    uint256 public potValue; // the current value available to spend in any expenses
-    // TODO: remove public in potValue
+    uint256 potValue; // the current value available to spend in any expenses
 
     mapping(address => bool) public isAllowedToParticipate; // if user is allowed to join
     mapping(address => bool) public isAllowedToManage; // if a member can add expenses
     mapping(address => bool) public isMember; // user is a member of the group, when PAID
-    address[] public listOfMembers;
+    address[] listOfMembers;
 
-    mapping(address => uint256) public contributions; // dictionary of how much a participant has spent in the group
-    // TODO: remove public property from all above
+    mapping(address => uint256) contributions; // dictionary of how much a participant has spent in the group
 
     error NotAParticipant(address user);
     error NotEnoughFunds(uint256 amountRequired, uint256 amountSent);
@@ -71,9 +68,8 @@ contract FriendsExpenseSplitter is Ownable {
 
     function setUserAsParticipant(address _user, bool _status)
         external
-        OnlyOwner
+        OnlyManager
     {
-        // TODO make onlyManager
         isAllowedToParticipate[_user] = _status;
         isAllowedToManage[_user] = _status ? isAllowedToManage[_user] : false;
     }

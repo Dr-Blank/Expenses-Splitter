@@ -6,15 +6,21 @@ const AddAccount = ({
   activeContract,
   activeClient,
   Privilege,
+  web3,
 }) => {
   const [name, setName] = useState("");
   const [ethAddress, setEthAddress] = useState("");
 
   const addClient = async () => {
+    let ethAddress = "0x87526743D03639Fecd532F1d65b26478960E9CB0";
+    if (!web3.utils.isAddress(ethAddress)) {
+      window.alert(`Invalid address: ${ethAddress}`);
+      return;
+    }
     // check if user is already added to
     try {
       let response = await activeContract.methods
-        .isAllowedToParticipate(ethAddress)
+        .isAllowedToParticipate(String(ethAddress))
         .call({ from: activeClient.ethAddress, gas: 4700000 });
       console.log("response :>> ", response);
       if (response) {
@@ -28,7 +34,7 @@ const AddAccount = ({
     // call contract here
     try {
       await activeContract.methods
-        .setUserAsParticipant(ethAddress, true)
+        .setUserAsParticipant(String(ethAddress), true)
         .call({ from: activeClient.ethAddress, gas: 4700000 });
     } catch (error) {
       console.error(error);

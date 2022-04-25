@@ -75,6 +75,7 @@ function App() {
         activeContract={activeContract}
         activeClient={activeClient}
         Privilege={Privilege}
+        web3={web3}
       />
       <AddExpense
         clients={clients}
