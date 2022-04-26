@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.22 <0.9.0;
+pragma solidity >=0.8.11 <0.9.0;
 
 contract Ownable {
     address public immutable OWNER;
@@ -93,7 +93,11 @@ contract FriendsExpenseSplitter is Ownable {
             revert NotEnoughFunds(baseAmount, funds);
         }
 
-        if (isMember[user]) revert AlreadyParticipated();
+        if (isMember[user]) {
+            address payable member = payable(user);
+            member.transfer(msg.value);
+            revert AlreadyParticipated();
+        }
 
         potValue += funds;
         isMember[user] = true;

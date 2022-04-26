@@ -1,5 +1,5 @@
-import { React, useState } from "react";
 import PropTypes from "prop-types";
+import { React, useState } from "react";
 
 const JoinExistingContract = ({
   web3,
@@ -18,6 +18,7 @@ const JoinExistingContract = ({
     }
     event.preventDefault();
     await joinContract(existingContractAddress);
+    await setPrivilege();
   };
 
   async function participate() {
@@ -27,6 +28,8 @@ const JoinExistingContract = ({
       return;
     }
 
+    await setPrivilege();
+
     switch (activeClient.privilege) {
       case Privilege.OWNER:
         window.alert("You are already the owner of this contract");
@@ -34,33 +37,83 @@ const JoinExistingContract = ({
       case Privilege.MANAGER:
       case Privilege.PARTICIPANT:
         window.alert("You have participated");
-        break;
+        return;
 
       default:
         break;
     }
 
     try {
-      let response = await activeContract.methods
-        .OWNER()
-        .call({ from: activeClient.ethAddress, gas: 4700000 });
-
-      if (response === activeClient.ethAddress) {
-        setActiveClient({ ...activeClient, privilege: Privilege.OWNER });
-        return;
-      }
-    } catch (err) {
-      console.error(err);
-    }
-    try {
-      let response = await activeContract.methods.participate().call({
+      let response = await activeContract.methods.participate().send({
         from: activeClient.ethAddress,
-        value: amountToParticipate,
         gas: "4700000",
+        value: amountToParticipate,
       });
       console.log("response", response);
+      window.alert("Participated Successfully");
+      await setPrivilege();
     } catch (error) {
-      // console.error(error);
+      console.error(error);
+      return;
+    }
+  }
+
+  async function setPrivilege() {
+    if (!activeClient.privileges === Privilege.NEW_CLIENT) {
+      // window.alert(`Privilege is set ${activeClient.privilege}`);
+      return;
+    }
+    try {
+      let response = await activeContract.methods
+        .OWNER()
+        .call({ from: activeClient.ethAddress });
+      if (response === activeClient.ethAddress) {
+        console.log("Setting as OWNER");
+        setActiveClient({
+          ...activeClient,
+          privilege: Privilege.OWNER,
+        });
+        return;
+      }
+
+      let isMember = await activeContract.methods
+        .isMember(activeClient.ethAddress)
+        .call({ from: activeClient.ethAddress });
+      if (!isMember) {
+        console.log("Setting as NEW_CLIENT");
+        setActiveClient({
+          ...activeClient,
+          privilege: Privilege.NEW_CLIENT,
+        });
+        return;
+      }
+
+      let isManager = await activeContract.methods
+        .isAllowedToManage(activeClient.ethAddress)
+        .call({ from: activeClient.ethAddress });
+      if (isManager) {
+        console.log("Setting as MANAGER");
+        setActiveClient({
+          ...activeClient,
+          privilege: Privilege.MANAGER,
+        });
+        return;
+      }
+
+      let isParticipant = await activeContract.methods
+        .isAllowedToParticipate(activeClient.ethAddress)
+        .call({ from: activeClient.ethAddress });
+      if (isParticipant) {
+        console.log("Setting as PARTICIPANT");
+        setActiveClient({
+          ...activeClient,
+          privilege: Privilege.PARTICIPANT,
+        });
+        return;
+      }
+    } catch (error) {
+      console.error(error);
+      return;
     }
   }
 
@@ -98,7 +151,9 @@ const JoinExistingContract = ({
             </button>
             <button
               type="button"
-              className={`btn btn-${amountToParticipate ? "primary" : "dark"}`}
+              className={`btn btn-${
+                amountToParticipate ? "primary" : "dark"
+              } me-2`}
               onClick={participate}
               // isDisabled={activeClient.privilege !== Privilege.NEW_CLIENT}
               // disabled={activeClient.privilege !== Privilege.NEW_CLIENT}
@@ -109,6 +164,13 @@ const JoinExistingContract = ({
                     "ether"
                   )} ETH to Join`
                 : "Check Price to Join"}
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={setPrivilege}
+            >
+              Check my Status
             </button>
           </div>
         </form>

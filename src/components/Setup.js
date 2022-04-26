@@ -6,18 +6,16 @@ import JoinExistingContract from "./Setup/JoinExistingContract";
 
 const Setup = ({
   web3,
-  setActiveContract,
   activeClient,
   setActiveClient,
   activeContract,
+  setActiveContract,
   Privilege,
 }) => {
   // connection state
   const [isMetaMaskConnected, setMetaMaskConnected] = useState(false);
   const [amountToParticipate, setAmountToParticipate] = useState("");
-  let contractAddress = "0xBfbdb50CCb1F4E43f0b673193d209012C2e81b69";
   const BACKEND_SERVER_PORT = 3001;
-  // console.log("contractAddress :>> ", contractAddress);
 
   // function to connect MetaMask
   async function connectMetamask() {
@@ -47,7 +45,12 @@ const Setup = ({
         gasPrice: "2000000000",
       });
 
-      setActiveContract(deployedContract);
+      await setActiveContract(deployedContract);
+      let membersCount = await deployedContract.methods
+        .getMembersCount()
+        .call({ from: activeClient.ethAddress });
+      console.log(`Members count on contract deployed: ${membersCount}`);
+
       window.alert(
         `Deployed new contract instance at address: ${deployedContract.options.address}`
       );

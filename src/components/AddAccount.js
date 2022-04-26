@@ -10,9 +10,10 @@ const AddAccount = ({
 }) => {
   const [name, setName] = useState("");
   const [ethAddress, setEthAddress] = useState("");
+  const [alsoManager, setAlsoManager] = useState(false);
 
   const addClient = async () => {
-    let ethAddress = "0x87526743D03639Fecd532F1d65b26478960E9CB0";
+    console.log("Setting as participant", ethAddress);
     if (!web3.utils.isAddress(ethAddress)) {
       window.alert(`Invalid address: ${ethAddress}`);
       return;
@@ -20,24 +21,26 @@ const AddAccount = ({
     // check if user is already added to
     try {
       let response = await activeContract.methods
-        .isAllowedToParticipate(String(ethAddress))
+        .isAllowedToParticipate(ethAddress)
         .call({ from: activeClient.ethAddress, gas: 4700000 });
-      console.log("response :>> ", response);
+      console.log("already participant? :>> ", response);
       if (response) {
-        window.alert("You already added to this user");
-        return;
+        window.alert("Already a Participant ", ethAddress);
+      } else {
+        // call contract here
+        if (alsoManager) {
+          await activeContract.methods
+            .setUserAsManager(ethAddress, true)
+            .send({ from: activeClient.ethAddress, gas: 4700000 });
+        } else {
+          await activeContract.methods
+            .setUserAsParticipant(ethAddress, true)
+            .send({ from: activeClient.ethAddress, gas: 4700000 });
+        }
       }
     } catch (error) {
       console.error(error);
-    }
-
-    // call contract here
-    try {
-      await activeContract.methods
-        .setUserAsParticipant(String(ethAddress), true)
-        .call({ from: activeClient.ethAddress, gas: 4700000 });
-    } catch (error) {
-      console.error(error);
+      return;
     }
 
     // add to clients
@@ -73,6 +76,18 @@ const AddAccount = ({
           value={ethAddress}
           onChange={(e) => setEthAddress(e.target.value)}
         />
+
+        <div className="form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            checked={alsoManager}
+            onChange={(e) => {
+              setAlsoManager(!alsoManager);
+            }}
+          />
+          <label className="form-check-label">Is Manager</label>
+        </div>
         <button
           onClick={addClient}
           type="button"
