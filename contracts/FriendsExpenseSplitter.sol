@@ -25,14 +25,14 @@ contract FriendsExpenseSplitter is Ownable {
     Expense[] expensesBook; // record of the expenses
 
     uint256 public immutable baseAmount;
-    uint256 potValue; // the current value available to spend in any expenses
+    uint256 public potValue; // the current value available to spend in any expenses
 
     mapping(address => bool) public isAllowedToParticipate; // if user is allowed to join
     mapping(address => bool) public isAllowedToManage; // if a member can add expenses
     mapping(address => bool) public isMember; // user is a member of the group, when PAID
-    address[] listOfMembers;
+    address[] public listOfMembers;
 
-    mapping(address => uint256) contributions; // dictionary of how much a participant has spent in the group
+    mapping(address => uint256) public contributions; // dictionary of how much a participant has spent in the group
 
     error NotAParticipant(address user);
     error NotEnoughFunds(uint256 amountRequired, uint256 amountSent);
@@ -138,7 +138,7 @@ contract FriendsExpenseSplitter is Ownable {
         if (!isMember[_user]) revert NotAParticipant(_user);
 
         contribution = contributions[_user];
-    }
+    } 
 
     function settleBalance() external payable OnlyOwner {
         // TODO: testing left

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
+import { useTransition, animated } from "react-spring";
 
 // components
 import Navbar from "./components/Navbar";
@@ -14,18 +15,10 @@ import Client from "./class/Client";
 import Expense from "./class/Expense";
 
 function App() {
-  // Constants/Vars to be used in the App
-  // const [currencyUrl, setCurrencyUrl] = useState("https://api.coinbase.com/v2/exchange-rates?currency=ETH");
-  // const [currencyData, setCurrencyData] = useState({});
-
   // Create web3 instance to pass to all child components
   const [web3] = useState(
     new Web3(Web3.givenProvider || "http://127.0.0.1:7545")
   );
-
-  // example
-  // let john = Client(0x1234, "John", Privilege.MANAGER);
-  // let beers = Expense(100, john.ethAddress, "Beers");
 
   const [clients, setClients] = useState([]); // {name: name, ethAddress: ethAddress}
   const [expenses, setExpenses] = useState([]);
@@ -44,21 +37,14 @@ function App() {
     setExpenses(expenses.filter((e) => e.ethAddress !== id));
   };
 
-  // TODO: Can this api be eliminated? fetch json data once and hard code it? (We need current exchange rate)
-  // useEffect(() => {
-  //   fetch(currencyUrl)
-  //   .then((response) => response.json())
-  //   .then((d) => {
-  //     setCurrencyData(d);
-  //   });
-  // }, []);
-
+  // ReactTransitions
+  const [showSection, setShowSection] = useState(false);
+ 
   // TODO: Error Handling/do not let user to enter any empty values (popups,etc)
   return (
     <div className="App">
       <Navbar
         clientPublicAddress={activeClient.ethAddress}
-        //currencyData={currencyData}
         clientPrivilege={activeClient.privilege}
       />
       <Setup
@@ -68,23 +54,35 @@ function App() {
         activeContract={activeContract}
         setActiveContract={setActiveContract}
         Privilege={Privilege}
+        setShowSection={setShowSection}
       />
-      <AddAccount
+     <AddAccount
         setClients={setClients}
         clients={clients}
         activeContract={activeContract}
         activeClient={activeClient}
         Privilege={Privilege}
         web3={web3}
-      />
+        showSection={showSection}
+        />
       <AddExpense
         clients={clients}
         setClients={setClients}
+        activeClient={activeClient}
+        activeContract={activeContract}
         expenses={expenses}
         setExpenses={setExpenses}
         deleteClient={deleteClient}
+        web3={web3}
+        showSection={showSection}
       />
-      <ExpensesTable expenses={expenses} deleteExpense={deleteExpense} />
+      <ExpensesTable
+        expenses={expenses}
+        deleteExpense={deleteExpense}
+        activeClient={activeClient}
+        activeContract={activeContract}
+        showSection={showSection}
+      />
     </div>
   );
 }
