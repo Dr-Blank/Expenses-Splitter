@@ -1,22 +1,8 @@
-import React from "react";
-
-// function filterFunction() {
-//     var input, filter, a, i;
-//     input = document.getElementById("search");
-//     filter = input.value.toUpperCase();
-//     div = document.getElementById("scrollable");
-//     a = div.getElementsByTagName("a");
-//     for (i = 0; i < a.length; i++) {
-//       txtValue = a[i].textContent || a[i].innerText;
-//       if (txtValue.toUpperCase().indexOf(filter) > -1) {
-//         a[i].style.display = "";
-//       } else {
-//         a[i].style.display = "none";
-//       }
-//     }
-//   }
+import React, { useState, useEffect } from "react";
+import NavbarSearch from "./NavbarSearch";
 
 const Navbar = ({ clientPublicAddress, clientPrivilege }) => {
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -68,26 +54,7 @@ const Navbar = ({ clientPublicAddress, clientPrivilege }) => {
               >
                 Currency
               </div>
-              <ul
-                className="dropdown-menu me-5"
-                id="scrollable"
-                aria-labelledby="navbarDropdown"
-              >
-                <li>
-                  <input
-                  // type="text"
-                  // placeholder="Search..."
-                  // id="search"
-                  // onkeyup="filterFunction()"
-                  />
-                </li>
-                {  
-                // console.log(currencyData)
-                // (Object.keys(currencyData.data.rates)).map(curr => (
-                //     <li><div className="dropdown-item">{curr}</div></li>
-                // ))
-                }
-              </ul>
+              <NavbarSearch />
             </li>
           </ul>
         </div>

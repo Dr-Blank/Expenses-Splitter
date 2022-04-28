@@ -10,6 +10,7 @@ const JoinExistingContract = ({
   setActiveClient,
   activeContract,
   Privilege,
+  setShowSection
 }) => {
   const handleSubmit = async (event) => {
     if (!existingContractAddress) {
@@ -73,6 +74,7 @@ const JoinExistingContract = ({
           ...activeClient,
           privilege: Privilege.OWNER,
         });
+        setShowSection(true);
         return;
       }
 
@@ -85,6 +87,7 @@ const JoinExistingContract = ({
           ...activeClient,
           privilege: Privilege.NEW_CLIENT,
         });
+        setShowSection(false);
         return;
       }
 
@@ -97,6 +100,7 @@ const JoinExistingContract = ({
           ...activeClient,
           privilege: Privilege.MANAGER,
         });
+        setShowSection(false);
         return;
       }
 
@@ -109,6 +113,7 @@ const JoinExistingContract = ({
           ...activeClient,
           privilege: Privilege.PARTICIPANT,
         });
+        setShowSection(false);
         return;
       }
     } catch (error) {

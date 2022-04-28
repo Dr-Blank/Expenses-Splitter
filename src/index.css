@@ -5,7 +5,7 @@
 }
 
 #search{
-  width:90%;
+  width:85%;
   padding: 2px;
   margin-left: 5%;
 }
@@ -58,6 +58,7 @@
   font-weight: 600;
   font-style: italic;
 }
+
 
 .add_account_heading{
   font-style: normal;
@@ -144,10 +145,20 @@
 }
 
 .table_container{
-  min-height: 30vh;
+  min-height: 10vh;
   max-height: 40vh;
   overflow-y: auto;
 
+}
+
+.settle_button_container{
+  margin: 0 0 30px 0;
+}
+
+.settle_button {
+  color: white;
+  font-weight: 400;
+  font-size: 20px
 }
 
 .table-expenses{

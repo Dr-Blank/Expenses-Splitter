@@ -3,15 +3,15 @@ import xpng from './images/x.png';
 
 const NamesButton = ({client, setSelectedClient, deleteClient}) => {
 
-  const [isSelected, setIsSelected] = useState(false);
+  const [isSelected,setIsSelected] = useState(false);
 
   const toggle = () => {
-      if (isSelected){
-        setIsSelected(false);
-      }
-      else{
-        setIsSelected(true);
-      }
+    if (isSelected){
+      setIsSelected(false);
+    }
+    else{
+      setIsSelected(true);
+    }
       setSelectedClient({name:client.name,ethAddress:client.ethAddress});
   };
 

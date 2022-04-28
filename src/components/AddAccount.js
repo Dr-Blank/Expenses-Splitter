@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTransition, animated } from "react-spring";
 
 const AddAccount = ({
   setClients,
@@ -7,6 +8,7 @@ const AddAccount = ({
   activeClient,
   Privilege,
   web3,
+  showSection
 }) => {
   const [name, setName] = useState("");
   const [ethAddress, setEthAddress] = useState("");
@@ -54,49 +56,62 @@ const AddAccount = ({
     setEthAddress("");
   };
 
+  const transition = useTransition(showSection, {
+    from: { y:300, opacity: 0 },
+    enter: { y:0,opacity: 1 },
+    leave: { y:300,opacity: 0 },
+  });
+
   // TODO: Error handling (empty values in forms shouldn't get submitted)
   return (
     <div className="container">
-      <hr></hr>
-      <h2 className="add_account_heading me-3">Add User</h2>
-      <div className="add_account d-flex flex-row flex-wrap justify-content-between">
-        <input
-          type="text"
-          id="username"
-          className="form-control"
-          placeholder="User Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="text"
-          id="eth_address"
-          className="form-control"
-          placeholder="ETH Public address"
-          value={ethAddress}
-          onChange={(e) => setEthAddress(e.target.value)}
-        />
+      {transition((style, item) =>
+        item ? (
+          <animated.div style={style}>
+            <hr></hr>
+            <h2 className="add_account_heading me-3">Add User</h2>
+            <div className="add_account d-flex flex-row flex-wrap justify-content-between">
+              <input
+                type="text"
+                id="username"
+                className="form-control"
+                placeholder="User Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="text"
+                id="eth_address"
+                className="form-control"
+                placeholder="ETH Public address"
+                value={ethAddress}
+                onChange={(e) => setEthAddress(e.target.value)}
+              />
 
-        <div className="form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            checked={alsoManager}
-            onChange={(e) => {
-              setAlsoManager(!alsoManager);
-            }}
-          />
-          <label className="form-check-label">Is Manager</label>
-        </div>
-        <button
-          onClick={addClient}
-          type="button"
-          id="add_user_btn"
-          className="btn btn-primary"
-        >
-          Add User
-        </button>
-      </div>
+              <div className="form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  checked={alsoManager}
+                  onChange={(e) => {
+                  setAlsoManager(!alsoManager);
+                  }}
+                />
+                <label className="form-check-label">Is Manager</label>
+              </div>
+              <button
+                onClick={addClient}
+                type="button"
+                id="add_user_btn"
+                className="btn btn-primary"
+              >
+                Add User
+              </button>
+            </div>
+          </animated.div>
+        ) : 
+          ""
+      )}
     </div>
   );
 };

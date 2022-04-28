@@ -11,6 +11,7 @@ const Setup = ({
   activeContract,
   setActiveContract,
   Privilege,
+  setShowSection
 }) => {
   // connection state
   const [isMetaMaskConnected, setMetaMaskConnected] = useState(false);
@@ -150,6 +151,7 @@ const Setup = ({
             activeClient={activeClient}
             setActiveClient={setActiveClient}
             Privilege={Privilege}
+            setShowSection={setShowSection}
           />
         </div>
       </div>
