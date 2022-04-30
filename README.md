@@ -1,58 +1,20 @@
-Should be a Readme but is TODO for now
+# Setup instructions:
 
-# features of this DApp
+1.	Clone this repository to local directory.
+2.	Install [NodeJS](https://nodejs.org/en/blog/release/v16.14.2/) with all the default options. (v16.14.2 or greater)
+3.	Change the current working directory to the main folder in console/bash/cmd.
+4.	to install all dependencies, run “npm install” and ignore warning if any.
+5.	Install [ganache](https://trufflesuite.com/ganache/) and start a local blockchain on port 8545 (default).
+6.	Add the local blockchain network running in ganache to the metamask.
+7.	Import a few accounts of local blockchain to MetaMask.
+8.	In console still opened in the previous step, type “npm run dev” to start the project (2 shells/cmd windows will open. One serves the frontend, other the backend), this will open project directly in browser (or got to http://localhost:3000/).
+Setup is complete. Please see the video on how to interact with the contract .
 
- 1. [x] Creation of a Contract with OWNER, a group pot, and a base amount required to join.
- 2. [ ] Ability to approve/remove user to join group
- 3. [ ] Ability of an user to join group by paying the base amount
- <!-- 4. [ ] Ability to promote/demote user to add transactions -->
- 5. [ ] Ability to add multiple transactions
- <!-- 6. [ ] ~~Add partial transactions❓~~ -->
- <!-- 7. [ ] Ability to obtain current users and their contributions -->
- 8. [ ] Ability to settle the transactions and return remaining amount to the pot
+---
 
 # Submission
 
- - [ ] Design Tests to show all 5 features are working
- - [ ] Documentation on how to setup our DApp with truffle and ganache
+ - [x] Design Tests to show all 5 features are working
+ - [x] Documentation on how to setup our DApp with truffle and ganache
  - [ ] record video showing a demo
- - [ ] 1/5th page of documentation of what we did and features we added
-
-## Frontend
-
----
-
- - [ ] Integration with MetaMask
- - [ ] Refresh?
- - [ ] Add Owner to the group automatically
- - [ ] Testing creation of the contract
- - [ ] Confirming adding of transactions before sending them to blockchain.
-
-## Contract
-
----
-
- - [ ] ❗❗make everything private when deploying
-
- - [ ] Test all modifiers! Can only be done from frontend.
- - [ ] Implement settle function that returns all the remaining amount in the pot to all the participants.
- - [x] Initial function to setup the base value and set owner
- - [x] function to allow user to join and be a manager 
- - [x] function for user to join by paying the base value
- - [ ]Add option to track if the contract is closed.
-
-## Script of Video
-Owners Screen
-- he deploys the new contract
-- he will add 2 users to the contract
-  
-User 1 Screen
-- paste the contract into join, pay the base amount
-
-Same for User 2 Screen
-
-Owners Screen
-- Start adding Expenses
-- Settle
-
-All metamask accounts receiving the remaining amount
+ - [x] 1/5th page of documentation of what we did and features we added
