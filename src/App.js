@@ -31,7 +31,22 @@ function App() {
 
   const [activeContract, setActiveContract] = useState();
 
-  const deleteClient = (id) => {
+  const deleteClient = async (id) => {
+    let isMember = await activeContract.methods.isMember(id).call({
+      from: activeClient.ethAddress,
+      gas: 4700000,
+    });
+
+    if (isMember) {
+      window.alert("User has already paid the base Amount");
+      return;
+    }
+
+    await activeContract.methods.setUserAsParticipant(id, false).send({
+      from: activeClient.ethAddress,
+      gas: 4700000,
+    });
+
     setClients(clients.filter((c) => c.ethAddress !== id));
     localStorage.removeItem(id);
   };
