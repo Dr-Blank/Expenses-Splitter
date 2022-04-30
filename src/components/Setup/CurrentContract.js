@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 const CurrentContract = ({
@@ -8,6 +8,8 @@ const CurrentContract = ({
   setActiveClient,
   Privilege,
 }) => {
+
+  const [copyAddress, setCopyAddress] = useState("Copy Contract Address");
   return (
     <>
       <h2 className="">Current Contract</h2>
@@ -20,12 +22,13 @@ const CurrentContract = ({
         {activeContract && (
           <>
             <button
-              className="btn btn-warning me-2"
+              className={`btn ${(copyAddress!=="Copied to clipboard!")? "btn-warning" : "btn-danger"} me-2`}
               onClick={() => {
                 navigator.clipboard.writeText(activeContract.options.address);
+                setCopyAddress("Copied to clipboard!");
               }}
             >
-              Copy Contract Address
+              {copyAddress}
             </button>
 
             <button
@@ -36,6 +39,7 @@ const CurrentContract = ({
                   ...activeClient,
                   privilege: Privilege.NEW_CLIENT,
                 });
+                setCopyAddress("Copy Contract Address")
               }}
             >
               Remove this contract
