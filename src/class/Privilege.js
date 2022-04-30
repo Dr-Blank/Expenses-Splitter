@@ -11,4 +11,4 @@ class Privilege {
   }
 }
 
-module.exports = Privilege;
+export default Privilege;

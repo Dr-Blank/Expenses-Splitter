@@ -6,4 +6,4 @@ class Expense {
   }
 }
 
-module.exports = Expense;
+export default Expense;
