@@ -22,7 +22,7 @@ contract FriendsExpenseSplitter is Ownable {
         string description;
     }
 
-    Expense[] expensesBook; // record of the expenses
+    Expense[] public expensesBook; // record of the expenses
 
     uint256 public immutable baseAmount;
     uint256 public potValue; // the current value available to spend in any expenses
@@ -138,16 +138,12 @@ contract FriendsExpenseSplitter is Ownable {
         if (!isMember[_user]) revert NotAParticipant(_user);
 
         contribution = contributions[_user];
-    } 
+    }
 
     function settleBalance() external payable OnlyOwner {
         // TODO: testing left
-        uint256 contractBalance = address(this).balance;
-
-        assert(contractBalance == listOfMembers.length * baseAmount);
-
-        uint256 expensePerHead = (contractBalance - potValue) /
-            listOfMembers.length;
+        uint256 expensePerHead = ((listOfMembers.length * baseAmount) -
+            potValue) / listOfMembers.length;
 
         // for every member
         for (uint256 i = 0; i < listOfMembers.length; i++) {
@@ -163,7 +159,17 @@ contract FriendsExpenseSplitter is Ownable {
         }
         delete listOfMembers;
 
+        // // transfer remaining balance to owner
+        // uint256 contractBalance = address(this).balance;
+        // address payable owner = payable(OWNER);
+        // owner.transfer(contractBalance);
         assert(address(this).balance == 0);
         potValue = 0;
+    }
+
+    function fallBack() external payable OnlyOwner {
+        uint256 contractBalance = address(this).balance;
+        address payable owner = payable(OWNER);
+        owner.transfer(contractBalance);
     }
 }
