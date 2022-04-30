@@ -17,7 +17,7 @@ import Expense from "./class/Expense";
 function App() {
   // Create web3 instance to pass to all child components
   const [web3] = useState(
-    new Web3(Web3.givenProvider || "http://127.0.0.1:7545")
+    new Web3(Web3.givenProvider || "http://127.0.0.1:8545")
   );
 
   const [chosenCurrency, setChosenCurrency] = useState("Currency");
