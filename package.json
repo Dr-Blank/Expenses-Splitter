@@ -10,7 +10,6 @@
     "start": "react-app-rewired start",
     "backend": "nodemon server.js",
     "dev": "start npm run start && start npm run backend",
-    "frontend": "parcel client/index.html",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
@@ -33,7 +32,6 @@
     "express": "^4.17.3",
     "fs": "^0.0.1-security",
     "ganache": "^7.0.4",
-    "jquery": "^3.6.0",
     "node-polyfill-webpack-plugin": "^1.1.4",
     "os": "^0.1.2",
     "react": "^18.0.0",
@@ -53,7 +51,6 @@
     "https-browserify": "^1.0.0",
     "nodemon": "^2.0.15",
     "os-browserify": "^0.3.0",
-    "parcel": "^2.5.0",
     "process": "^0.11.10",
     "querystring-es3": "^0.2.1",
     "react-app-rewired": "^2.2.1",

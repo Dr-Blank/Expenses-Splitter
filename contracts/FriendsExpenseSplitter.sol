@@ -82,7 +82,6 @@ contract FriendsExpenseSplitter is Ownable {
     }
 
     function participate() external payable {
-        // TODO: don't allow user to participate more than once
         address user = msg.sender;
         uint256 funds = msg.value;
 
@@ -141,7 +140,6 @@ contract FriendsExpenseSplitter is Ownable {
     }
 
     function settleBalance() external payable OnlyOwner {
-        // TODO: testing left
         uint256 expensePerHead = ((listOfMembers.length * baseAmount) -
             potValue) / listOfMembers.length;
 
@@ -158,11 +156,6 @@ contract FriendsExpenseSplitter is Ownable {
             contributions[member] = 0;
         }
         delete listOfMembers;
-
-        // // transfer remaining balance to owner
-        // uint256 contractBalance = address(this).balance;
-        // address payable owner = payable(OWNER);
-        // owner.transfer(contractBalance);
         assert(address(this).balance == 0);
         potValue = 0;
     }
