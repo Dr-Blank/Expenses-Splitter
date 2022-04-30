@@ -1,8 +1,12 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import NavbarSearch from "./NavbarSearch";
 
-const Navbar = ({ clientPublicAddress, clientPrivilege, chosenCurrency, setChosenCurrency }) => {
-
+const Navbar = ({
+  clientPublicAddress,
+  clientPrivilege,
+  chosenCurrency,
+  setChosenCurrency,
+}) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -54,9 +58,7 @@ const Navbar = ({ clientPublicAddress, clientPrivilege, chosenCurrency, setChose
               >
                 {chosenCurrency}
               </div>
-              <NavbarSearch 
-                setChosenCurrency={setChosenCurrency}
-              />
+              <NavbarSearch setChosenCurrency={setChosenCurrency} />
             </li>
           </ul>
         </div>

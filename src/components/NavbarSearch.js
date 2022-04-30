@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
-const NavbarSearch = ({setChosenCurrency}) => {
-
+const NavbarSearch = ({ setChosenCurrency }) => {
   const [currencyUrl, setCurrencyUrl] = useState(
     "https://api.coinbase.com/v2/exchange-rates?currency=ETH"
   );
@@ -17,16 +16,14 @@ const NavbarSearch = ({setChosenCurrency}) => {
       });
   }, []);
 
-    //Search function for currencies
-    function filterFunction(keyword) {
+  //Search function for currencies
+  function filterFunction(keyword) {
     if (keyword !== "") {
       const results = currencyNames.filter((curr) => {
         return curr.toLowerCase().startsWith(keyword.toLowerCase());
       });
       setFilteredResults(results);
-    }
-    else{
-
+    } else {
     }
   }
 
@@ -45,13 +42,17 @@ const NavbarSearch = ({setChosenCurrency}) => {
             onChange={(e) => filterFunction(e.target.value)}
           />
         </li>
-        {
-        (filteredResults !== undefined) &&
-        filteredResults.map((curr) => (
-          <li key={curr}>
-            <div className="dropdown-item" onClick={() => setChosenCurrency(curr) }>{curr}</div>
-          </li>
-        ))}
+        {filteredResults !== undefined &&
+          filteredResults.map((curr) => (
+            <li key={curr}>
+              <div
+                className="dropdown-item"
+                onClick={() => setChosenCurrency(curr)}
+              >
+                {curr}
+              </div>
+            </li>
+          ))}
       </ul>
     </>
   );

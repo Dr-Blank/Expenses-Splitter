@@ -13,7 +13,7 @@ const Setup = ({
   Privilege,
   setShowSection,
   clients,
-  setClients
+  setClients,
 }) => {
   // connection state
   const [isMetaMaskConnected, setMetaMaskConnected] = useState(false);

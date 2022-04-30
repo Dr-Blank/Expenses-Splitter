@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import PropTypes from "prop-types";
 
 const CreateNewContract = ({ deployNewContract }) => {
-  const [baseAmount, setBaseAmount] = useState(1);
+  const [baseAmount, setBaseAmount] = useState(3);
   const handleSubmit = (event) => {
     event.preventDefault(); // prevents reloading of page
     if (baseAmount <= 0) {

@@ -12,7 +12,7 @@ const JoinExistingContract = ({
   Privilege,
   setShowSection,
   clients,
-  setClients
+  setClients,
 }) => {
   const handleSubmit = async (event) => {
     if (!existingContractAddress) {
@@ -62,24 +62,28 @@ const JoinExistingContract = ({
   }
 
   // return clients from contract
-  const membersFromContract = async () =>{
+  const membersFromContract = async () => {
     let totalMembers = await activeContract.methods.getMembersCount().call();
     let tempClients = [];
-      for (let i = 1; i <= totalMembers-1; i++) {
-        let member = await activeContract.methods
-        .listOfMembers(i)
-        .call();
-        let name = localStorage.getItem(member);
-        if(name !== null){
-          tempClients.push({name: name, ethAddress: member, privilege: Privilege.PARTICIPANT});
-        }
-        else{
-          tempClients.push({name: member, ethAddress: member, privilege: Privilege.PARTICIPANT});
-        }
+    for (let i = 1; i <= totalMembers - 1; i++) {
+      let member = await activeContract.methods.listOfMembers(i).call();
+      let name = localStorage.getItem(member);
+      if (name !== null) {
+        tempClients.push({
+          name: name,
+          ethAddress: member,
+          privilege: Privilege.PARTICIPANT,
+        });
+      } else {
+        tempClients.push({
+          name: member,
+          ethAddress: member,
+          privilege: Privilege.PARTICIPANT,
+        });
       }
-      setClients([...clients,...tempClients]);
-
     }
+    setClients([...clients, ...tempClients]);
+  };
 
   async function setPrivilege() {
     if (!activeClient.privileges === Privilege.NEW_CLIENT) {

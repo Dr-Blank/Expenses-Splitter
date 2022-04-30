@@ -20,7 +20,7 @@ function App() {
     new Web3(Web3.givenProvider || "http://127.0.0.1:7545")
   );
 
-  const [chosenCurrency,setChosenCurrency] = useState("Currency");
+  const [chosenCurrency, setChosenCurrency] = useState("Currency");
 
   const [clients, setClients] = useState([]); // {name: name, ethAddress: ethAddress}
   const [expenses, setExpenses] = useState([]);
@@ -33,7 +33,7 @@ function App() {
 
   const deleteClient = (id) => {
     setClients(clients.filter((c) => c.ethAddress !== id));
-    localStorage.removeItem(id)
+    localStorage.removeItem(id);
   };
 
   const deleteExpense = (id) => {
@@ -42,14 +42,13 @@ function App() {
 
   // ReactTransitions
   const [showSection, setShowSection] = useState(false);
- 
 
   return (
     <div className="App">
       <Navbar
         clientPublicAddress={activeClient.ethAddress}
         clientPrivilege={activeClient.privilege}
-        chosenCurrency ={chosenCurrency}
+        chosenCurrency={chosenCurrency}
         setChosenCurrency={setChosenCurrency}
       />
       <Setup
@@ -63,7 +62,7 @@ function App() {
         clients={clients}
         setClients={setClients}
       />
-     <AddAccount
+      <AddAccount
         setClients={setClients}
         clients={clients}
         activeContract={activeContract}
@@ -71,7 +70,7 @@ function App() {
         Privilege={Privilege}
         web3={web3}
         showSection={showSection}
-        />
+      />
       <AddExpense
         clients={clients}
         setClients={setClients}

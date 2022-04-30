@@ -8,7 +8,7 @@ const AddAccount = ({
   activeClient,
   Privilege,
   web3,
-  showSection
+  showSection,
 }) => {
   const [name, setName] = useState("");
   const [ethAddress, setEthAddress] = useState("");
@@ -38,7 +38,6 @@ const AddAccount = ({
           await activeContract.methods
             .setUserAsParticipant(ethAddress, true)
             .send({ from: activeClient.ethAddress, gas: 4700000 });
-          
         }
       }
     } catch (error) {
@@ -60,9 +59,9 @@ const AddAccount = ({
   };
 
   const transition = useTransition(showSection, {
-    from: { y:300, opacity: 0 },
-    enter: { y:0,opacity: 1 },
-    leave: { y:300,opacity: 0 },
+    from: { y: 300, opacity: 0 },
+    enter: { y: 0, opacity: 1 },
+    leave: { y: 300, opacity: 0 },
   });
 
   // TODO: Error handling (empty values in forms shouldn't get submitted)
@@ -90,8 +89,7 @@ const AddAccount = ({
                 value={ethAddress}
                 onChange={(e) => setEthAddress(e.target.value)}
               />
-              {
-              /* <div className="form-check">
+              {/* <div className="form-check">
                 <input
                   type="checkbox"
                   className="form-check-input"
@@ -101,8 +99,7 @@ const AddAccount = ({
                   }}
                 />
                 <label className="form-check-label">Is Manager</label>
-              </div> */
-              }
+              </div> */}
               <button
                 onClick={addClient}
                 type="button"
@@ -113,8 +110,9 @@ const AddAccount = ({
               </button>
             </div>
           </animated.div>
-        ) : 
+        ) : (
           ""
+        )
       )}
     </div>
   );

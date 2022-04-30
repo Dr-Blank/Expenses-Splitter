@@ -8,7 +8,6 @@ const CurrentContract = ({
   setActiveClient,
   Privilege,
 }) => {
-
   const [copyAddress, setCopyAddress] = useState("Copy Contract Address");
   return (
     <>
@@ -22,7 +21,11 @@ const CurrentContract = ({
         {activeContract && (
           <>
             <button
-              className={`btn ${(copyAddress!=="Copied to clipboard!")? "btn-warning" : "btn-danger"} me-2`}
+              className={`btn ${
+                copyAddress !== "Copied to clipboard!"
+                  ? "btn-warning"
+                  : "btn-danger"
+              } me-2`}
               onClick={() => {
                 navigator.clipboard.writeText(activeContract.options.address);
                 setCopyAddress("Copied to clipboard!");
@@ -39,7 +42,7 @@ const CurrentContract = ({
                   ...activeClient,
                   privilege: Privilege.NEW_CLIENT,
                 });
-                setCopyAddress("Copy Contract Address")
+                setCopyAddress("Copy Contract Address");
               }}
             >
               Remove this contract
