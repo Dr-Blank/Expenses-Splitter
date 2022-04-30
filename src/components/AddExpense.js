@@ -83,7 +83,7 @@ const AddExpense = ( {clients, setClients, activeClient, activeContract, expense
         <button 
             type="button" 
             onClick={toggle} 
-            className={`btn btn-sm btn-primary names_btn ${isSelected ? "btn-success selected_user" : ""}`}>
+            className={`names_btn ${isSelected ? "selected_user" : ""}`}>
                 Owner
         </button>
         <span onClick={() =>deleteClient()}>
@@ -96,6 +96,7 @@ const AddExpense = ( {clients, setClients, activeClient, activeContract, expense
                   client={client}
                   setSelectedClient={setSelectedClient}
                   deleteClient={deleteClient}
+                  activeContract={activeContract}
                 />
               ))}
           </div>

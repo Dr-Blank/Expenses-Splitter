@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import NavbarSearch from "./NavbarSearch";
 
-const Navbar = ({ clientPublicAddress, clientPrivilege }) => {
+const Navbar = ({ clientPublicAddress, clientPrivilege, chosenCurrency, setChosenCurrency }) => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -44,7 +44,7 @@ const Navbar = ({ clientPublicAddress, clientPrivilege }) => {
                 {clientPrivilege.stringify}
               </div>
             </li>
-            <li className="nav-item dropdown me-5 pe-2">
+            <li className="nav-item dropstart me-5">
               <div
                 className="nav-link dropdown-toggle"
                 id="navbarDropdown"
@@ -52,9 +52,11 @@ const Navbar = ({ clientPublicAddress, clientPrivilege }) => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Currency
+                {chosenCurrency}
               </div>
-              <NavbarSearch />
+              <NavbarSearch 
+                setChosenCurrency={setChosenCurrency}
+              />
             </li>
           </ul>
         </div>

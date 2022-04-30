@@ -1,18 +1,27 @@
 import React, { useState } from 'react'
 import xpng from './images/x.png';
 
-const NamesButton = ({client, setSelectedClient, deleteClient}) => {
+const NamesButton = ({client, setSelectedClient, deleteClient, activeContract}) => {
 
   const [isSelected,setIsSelected] = useState(false);
 
-  const toggle = () => {
-    if (isSelected){
-      setIsSelected(false);
+  const toggle = async () => {
+    let checkIfMember = await activeContract.methods
+    .isMember(client.ethAddress)
+    .call();
+    if(checkIfMember) {
+      if (isSelected){
+        setIsSelected(false);
+      }
+      else{
+        setIsSelected(true);
+      }
+        setSelectedClient({name:client.name,ethAddress:client.ethAddress});
     }
     else{
-      setIsSelected(true);
+      window.alert("Cannot choose this individual as their payment to join contract is pending.");
     }
-      setSelectedClient({name:client.name,ethAddress:client.ethAddress});
+    
   };
 
   // TODO:add ability to delete an user
@@ -21,7 +30,7 @@ const NamesButton = ({client, setSelectedClient, deleteClient}) => {
         <button 
             type="button" 
             onClick={toggle} 
-            className={`btn btn-sm btn-primary names_btn ${isSelected ? "btn-success selected_user" : ""}`}>
+            className={`names_btn ${isSelected ? "selected_user" : ""}`}>
                 {client.name}
         </button>
         <span onClick={() =>deleteClient(client.ethAddress)}>

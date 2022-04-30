@@ -20,6 +20,8 @@ function App() {
     new Web3(Web3.givenProvider || "http://127.0.0.1:7545")
   );
 
+  const [chosenCurrency,setChosenCurrency] = useState("Currency");
+
   const [clients, setClients] = useState([]); // {name: name, ethAddress: ethAddress}
   const [expenses, setExpenses] = useState([]);
 
@@ -31,6 +33,7 @@ function App() {
 
   const deleteClient = (id) => {
     setClients(clients.filter((c) => c.ethAddress !== id));
+    localStorage.removeItem(id)
   };
 
   const deleteExpense = (id) => {
@@ -40,12 +43,14 @@ function App() {
   // ReactTransitions
   const [showSection, setShowSection] = useState(false);
  
-  // TODO: Error Handling/do not let user to enter any empty values (popups,etc)
+
   return (
     <div className="App">
       <Navbar
         clientPublicAddress={activeClient.ethAddress}
         clientPrivilege={activeClient.privilege}
+        chosenCurrency ={chosenCurrency}
+        setChosenCurrency={setChosenCurrency}
       />
       <Setup
         web3={web3}
@@ -55,6 +60,8 @@ function App() {
         setActiveContract={setActiveContract}
         Privilege={Privilege}
         setShowSection={setShowSection}
+        clients={clients}
+        setClients={setClients}
       />
      <AddAccount
         setClients={setClients}

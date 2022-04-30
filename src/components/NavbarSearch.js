@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-const NavbarSearch = () => {
+const NavbarSearch = ({setChosenCurrency}) => {
 
   const [currencyUrl, setCurrencyUrl] = useState(
     "https://api.coinbase.com/v2/exchange-rates?currency=ETH"
@@ -33,7 +33,7 @@ const NavbarSearch = () => {
   return (
     <>
       <ul
-        className="dropdown-menu me-5"
+        className="dropdown-menu"
         id="scrollable"
         aria-labelledby="navbarDropdown"
       >
@@ -49,7 +49,7 @@ const NavbarSearch = () => {
         (filteredResults !== undefined) &&
         filteredResults.map((curr) => (
           <li key={curr}>
-            <div className="dropdown-item">{curr}</div>
+            <div className="dropdown-item" onClick={() => setChosenCurrency(curr) }>{curr}</div>
           </li>
         ))}
       </ul>

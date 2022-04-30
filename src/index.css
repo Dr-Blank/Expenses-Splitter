@@ -43,6 +43,7 @@
 }
 
 #navbarDropdown{
+  width: 50px;
   color: rgb(34, 34, 34);
   font-weight: 500;
 }
@@ -96,10 +97,24 @@
 .names_btn{
   margin-left: 10px;
   margin-bottom: 10px;
+  border: none;
+  background-color: #0275d8;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
 }
 
 .selected_user{
- border: solid 1px rgb(21, 21, 21);
+  background-image: linear-gradient( 135deg, #5EFCE8 10%, #736EFE 100%);
+  background-size: 300% 300%;
+  animation: gradient 3s linear infinite;
+  animation-direction: alternate;
+  transform: scale(1.1);
+}
+
+@keyframes gradient {
+  0% {background-position: 0%}
+  100% {background-position: 100%}
 }
 
 .names_btn_container span{
