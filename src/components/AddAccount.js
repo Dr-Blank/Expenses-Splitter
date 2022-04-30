@@ -38,6 +38,7 @@ const AddAccount = ({
           await activeContract.methods
             .setUserAsParticipant(ethAddress, true)
             .send({ from: activeClient.ethAddress, gas: 4700000 });
+          
         }
       }
     } catch (error) {
@@ -50,6 +51,8 @@ const AddAccount = ({
       ...clients,
       { name: name, ethAddress: ethAddress, privilege: Privilege.PARTICIPANT },
     ]);
+
+    localStorage.setItem(ethAddress, name);
 
     // clear the form
     setName("");
@@ -87,8 +90,8 @@ const AddAccount = ({
                 value={ethAddress}
                 onChange={(e) => setEthAddress(e.target.value)}
               />
-
-              <div className="form-check">
+              {
+              /* <div className="form-check">
                 <input
                   type="checkbox"
                   className="form-check-input"
@@ -98,7 +101,8 @@ const AddAccount = ({
                   }}
                 />
                 <label className="form-check-label">Is Manager</label>
-              </div>
+              </div> */
+              }
               <button
                 onClick={addClient}
                 type="button"
