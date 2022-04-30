@@ -74,7 +74,7 @@ const JoinExistingContract = ({
           tempClients.push({name: name, ethAddress: member, privilege: Privilege.PARTICIPANT});
         }
         else{
-          tempClients.push({name: "prevuser", ethAddress: member, privilege: Privilege.PARTICIPANT});
+          tempClients.push({name: member, ethAddress: member, privilege: Privilege.PARTICIPANT});
         }
       }
       setClients([...clients,...tempClients]);
